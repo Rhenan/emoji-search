@@ -13,7 +13,7 @@ describe("2e2 tests", () => {
     cy.get("[data-cy='emoji-row']").should("have.length", 20);
   });
 
-  it("allows users to search for an emoji", () =>{
+  it("allows users to search for an emoji", () => {
     cy.get("[data-cy='emoji-search-input']").type("joy");
     cy.get("[data-cy='emoji-row']").should("have.length", 3);
     cy.contains("Joy");
@@ -25,6 +25,13 @@ describe("2e2 tests", () => {
       .type("cactus");
     cy.get("[data-cy='emoji-row']").should("have.length", 1);
     cy.contains("Cactus");
+  });
+
+  it("shows a 'emoji not found' message ", () => {
+    cy.get("[data-cy='emoji-search-input']").type("emoji that does not exist");
+    cy.get("[data-cy='emoji-row']").should("have.length", 0);
+    cy.contains("Emojis not found");
+    cy.contains("Try searching for something else");
   });
 
 });
